@@ -9,10 +9,11 @@ const TodoList = (props) => {
     if (tasks.length > 0) {
         tasks = props.tasks.map(task => {
             return <Item
+                changeTaskText={props.changeTaskText}
                 key={task.id}
                 todoId={props.id}
                 taskId={task.id}
-                task={task.taskText}
+                taskText={task.taskText}
                 deleteTask={props.deleteTask} />
         })
     }

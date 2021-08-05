@@ -5,11 +5,9 @@ import App from './App';
 
 let AppContainer = () => {
     return(
-      <BrowserRouter>
         <Provider store={store}>
           <App />
         </Provider>
-      </BrowserRouter>
     )
 }
 

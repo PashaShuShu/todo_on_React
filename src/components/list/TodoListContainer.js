@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
 import TodoList from './TodoList'
 import { getLists } from '../../redux/selectors/selector'
-import { addNewTask, deleteTodo, deleteTask } from './../../redux/reducers/lists-reduser';
+import { addNewTask, deleteTodo, deleteTask, changeTaskText } from './../../redux/reducers/lists-reduser';
 
 const TodoListContainer = (props) => {
 
     let list = props.lists.map((item => {
         return <TodoList
+            changeTaskText={props.changeTaskText}
             deleteTask={props.deleteTask}
             deleteTodo={props.deleteTodo}
             addNewTask={props.addNewTask}
@@ -31,4 +32,5 @@ export default connect(mapStateToProps, {
     addNewTask,
     deleteTodo,
     deleteTask,
+    changeTaskText,
 })(TodoListContainer);
