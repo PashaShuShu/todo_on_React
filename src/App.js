@@ -2,6 +2,7 @@ import TodoListContainer from './components/list/TodoListContainer';
 import { connect } from 'react-redux';
 import { addNewTodo } from './redux/reducers/lists-reduser';
 import { useState } from 'react'
+import classes from './App.module.css'
 
 function App(props) {
 
@@ -20,16 +21,15 @@ function App(props) {
   }
 
   return (
-    <div className="App">
+    <div className={classes.App}>
       <div>
         <h1>TODO</h1>
-        <input onChange={onChangeAddLost} type="text" value={todoListName} />
-        <button onClick={onAddNewTodoList}>NewList</button>
+        <input className={classes.list_name} placeholder="new list name" onChange={onChangeAddLost} type="text" value={todoListName} />
+        <button className="btn btn-success" onClick={onAddNewTodoList}>NewList</button>
       </div>
-      <div>
+      <div className={classes.todos}>
         <TodoListContainer />
       </div>
-
     </div>
   );
 }

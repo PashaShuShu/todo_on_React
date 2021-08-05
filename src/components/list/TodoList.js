@@ -1,5 +1,6 @@
 import Item from './item/TodoListItem'
 import { useState } from 'react'
+import classes from './list.module.css'
 
 const TodoList = (props) => {
     let [addTask, setAddTask] = useState(false);
@@ -9,12 +10,15 @@ const TodoList = (props) => {
     if (tasks.length > 0) {
         tasks = props.tasks.map(task => {
             return <Item
+                changeDone={props.changeDone}
                 changeTaskText={props.changeTaskText}
                 key={task.id}
                 todoId={props.id}
                 taskId={task.id}
                 taskText={task.taskText}
-                deleteTask={props.deleteTask} />
+                deleteTask={props.deleteTask}
+                done={task.done}
+            />
         })
     }
 
@@ -36,20 +40,20 @@ const TodoList = (props) => {
     }
 
     return (
-        <div>
+        <div className={"p-4 p-md-5 mb-4 text-white rounded bg-dark"}>
             <div>
                 <h2>
-                    {props.name}
+                    <span className={classes.todo_name}>{props.name}</span>
                     {addTask ?
                         <div>
                             <input type="text" onChange={onChangeNewTaskText} value={newTaskText} />
-                            <button onClick={onSetAddTaskOff}>add</button>
+                            <button className="btn btn-success" onClick={onSetAddTaskOff}>add</button>
                         </div>
                         :
-                        <button onClick={onSetAddTaskOn}>Add new task</button>
+                        <button className="btn btn-success" onClick={onSetAddTaskOn}>Add new task</button>
                     }
 
-                    <button onClick={onDeleteTodo}>Delete</button>
+                    <button className="btn btn-outline-danger" onClick={onDeleteTodo}>Delete</button>
                 </h2>
 
             </div >

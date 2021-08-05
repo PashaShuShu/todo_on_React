@@ -3,6 +3,7 @@ const ADD_NEW_TASK = "ADD-NEW-TASK";
 const DELETE_TODO = "DELETE-TODO";
 const DELETE_TASK = "DELETE-TASK";
 const CHANGE_TASK_TEXT = "CHANGE-TASK-TEXT";
+const CHANGE_TASK_DONE = "CHANGE-TASK-DONE";
 
 let initialState = {
     todos: [
@@ -97,6 +98,26 @@ const listReduser = (state = initialState, action) => {
                 return todo;
             })
         }
+        case CHANGE_TASK_DONE: return {
+            ...state,
+            todos: state.todos.map(todo => {
+                if (todo.id === action.todoId) {
+                    return {
+                        ...todo,
+                        tasks: todo.tasks.map(task => {
+                            if (task.id === action.taskId) {
+                                return {
+                                    ...task,
+                                    done: !task.done,
+                                }
+                            }
+                            return task
+                        })
+                    }
+                }
+                return todo;
+            })
+        }
         default:
             return state;
     }
@@ -107,5 +128,6 @@ export const addNewTask = (todoId, taskText) => ({ type: ADD_NEW_TASK, todoId, t
 export const deleteTodo = (todoId) => ({ type: DELETE_TODO, todoId });
 export const deleteTask = (todoId, taskId) => ({ type: DELETE_TASK, todoId, taskId });
 export const changeTaskText = (todoId, taskId, taskText) => ({ type: CHANGE_TASK_TEXT, todoId, taskId, taskText })
+export const changeDone = (todoId, taskId) => ({ type: CHANGE_TASK_DONE, todoId, taskId })
 
 export default listReduser;

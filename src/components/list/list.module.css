@@ -1,0 +1,33 @@
+.tasks{
+    width:100%;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+
+    grid-auto-columns: 3fr 1fr;
+    grid-template-areas: "task button";
+}
+
+.task_buttons{
+    grid-area: "button";
+}
+
+.task_text{
+    margin-left: 10px;
+    grid-area: "task";
+    
+}
+
+.task_done{
+    text-decoration: line-through;
+}
+
+.checkbox{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.todo_name{
+    margin: 6%;
+}
