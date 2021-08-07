@@ -1,22 +1,25 @@
 import Item from './item/TodoListItem'
 import { useState } from 'react'
 import classes from './list.module.css'
+import { useDispatch } from 'react-redux'
+import { addNewTask, deleteTodo } from './../../redux/reducers/lists-reduser';
 
 const TodoList = (props) => {
+
+    const dispatch = useDispatch();
+
     let [addTask, setAddTask] = useState(false);
     let [newTaskText, setNewTaskText] = useState("");
+   
 
     let tasks = props.tasks;
     if (tasks.length > 0) {
         tasks = props.tasks.map(task => {
             return <Item
-                changeDone={props.changeDone}
-                changeTaskText={props.changeTaskText}
                 key={task.id}
                 todoId={props.id}
                 taskId={task.id}
                 taskText={task.taskText}
-                deleteTask={props.deleteTask}
                 done={task.done}
             />
         })
@@ -26,7 +29,7 @@ const TodoList = (props) => {
         setAddTask(true);
     }
     let onSetAddTaskOff = () => {
-        props.addNewTask(props.id, newTaskText);
+        dispatch(addNewTask(props.id, newTaskText));
         setNewTaskText("");
         setAddTask(false);
     }
@@ -36,7 +39,7 @@ const TodoList = (props) => {
     }
 
     let onDeleteTodo = () => {
-        props.deleteTodo(props.id);
+        dispatch(deleteTodo(props.id));
     }
 
     return (

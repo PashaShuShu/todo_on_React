@@ -49,7 +49,6 @@ const listReduser = (state = initialState, action) => {
         case ADD_NEW_TASK: return {
             ...state,
             todos: state.todos.map(todo => {
-                debugger
                 if (action.todoId === todo.id) {
                     return {
                         ...todo,

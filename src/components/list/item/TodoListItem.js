@@ -1,7 +1,11 @@
 import classes from '../list.module.css'
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { changeDone, deleteTask, changeTaskText } from '../../../redux/reducers/lists-reduser';
 
 const TodoListItem = (props) => {
+    const dispatch = useDispatch();
+
     let [editMode, setEditMode] = useState(false);
     let [taskText, setTaskText] = useState(props.taskText);
 
@@ -9,7 +13,7 @@ const TodoListItem = (props) => {
         setEditMode(true);
     }
     let onEditModeOff = () => {
-        props.changeTaskText(props.todoId, props.taskId)
+        dispatch(changeTaskText(props.todoId, props.taskId));
         setEditMode(false);
     }
 
@@ -18,18 +22,18 @@ const TodoListItem = (props) => {
     }
 
     let onDeleteTask = () => {
-        props.deleteTask(props.todoId, props.taskId)
+        dispatch(deleteTask(props.todoId, props.taskId));
     }
 
     let onDone = () => {
-        props.changeDone(props.todoId, props.taskId)
+        dispatch(changeDone(props.todoId, props.taskId));
     }
 
     return (
         <div className={classes.tasks}>
             <div>
-                <input onClick={onDone} className={classes.checkbox} type='checkbox' checked={props.done}></input>
-                <span className={classes.task_text, props.done ? classes.task_done : null} >
+                <input onClick={onDone} className={classes.checkbox} type='checkbox' defaultChecked={props.done}></input>
+                <span className={(classes.task_text, props.done ? classes.task_done : null)} >
                     {editMode ?
                         <input type='text' onChange={onTaskTextChanged} value={taskText} />
                         :
